@@ -6,8 +6,10 @@ import type { YtDlpOptions, YtDlpPlaylist, YtDlpVideo } from "./type";
 const isPlaylist = (i: any): i is YtDlpPlaylist => Array.isArray(i.entries);
 
 export class YtDlpPlugin extends PlayableExtractorPlugin {
-  constructor({ update }: YtDlpOptions = {}) {
+  cookies?: string;
+  constructor({ update, cookies }: YtDlpOptions = {}) {
     super();
+    this.cookies = cookies;
     if (update ?? true) download().catch(() => undefined);
   }
 
@@ -33,6 +35,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
       preferFreeFormats: true,
       skipDownload: true,
       simulate: true,
+      cookies: this.cookies
     }).catch(e => {
       throw new DisTubeError("YTDLP_ERROR", `${e.stderr || e}`);
     });
@@ -64,6 +67,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
       preferFreeFormats: true,
       skipDownload: true,
       simulate: true,
+      cookies: this.cookies,
       format: "ba/ba*",
     }).catch(e => {
       throw new DisTubeError("YTDLP_ERROR", `${e.stderr || e}`);
