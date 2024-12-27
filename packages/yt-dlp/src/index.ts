@@ -7,7 +7,7 @@ const isPlaylist = (i: any): i is YtDlpPlaylist => Array.isArray(i.entries);
 
 export class YtDlpPlugin extends PlayableExtractorPlugin {
   cookies?: string;
-  cookiesFromBrowser?: string | "chrome" | "firefox";
+  cookiesFromBrowser?: string | "chrome" | "chromium" | "firefox";
   constructor({ update, cookies, cookiesFromBrowser }: YtDlpOptions = {}) {
     super();
     this.cookies = cookies;
