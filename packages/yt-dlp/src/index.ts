@@ -1,7 +1,10 @@
+/* eslint-disable linebreak-style */
+
 import { download, json } from "./wrapper";
 import { DisTubeError, PlayableExtractorPlugin, Playlist, Song } from "distube";
 import type { DisTube, ResolveOptions } from "distube";
 import type { YtDlpOptions, YtDlpPlaylist, YtDlpVideo } from "./type";
+import ytpl from "@distube/ytpl";
 
 const isPlaylist = (i: any): i is YtDlpPlaylist => Array.isArray(i.entries);
 
@@ -30,18 +33,35 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
   }
 
   async resolve<T>(url: string, options: ResolveOptions<T>) {
-    const info = await json(url, {
-      dumpSingleJson: true,
-      noWarnings: true,
-      noCallHome: true,
-      preferFreeFormats: true,
-      skipDownload: true,
-      simulate: true,
-      cookies: this.cookies,
-      cookiesFromBrowser: this.cookiesFromBrowser
-    }).catch(e => {
-      throw new DisTubeError("YTDLP_ERROR", `${e.stderr || e}`);
-    });
+    let info;
+    if (ytpl.validateID(url)) {
+      info = await json(url, {
+        dumpSingleJson: true,
+        noWarnings: true,
+        noCallHome: true,
+        preferFreeFormats: true,
+        skipDownload: true,
+        simulate: true,
+        flatPlaylist: true,
+        cookies: this.cookies,
+        cookiesFromBrowser: this.cookiesFromBrowser
+      }).catch(e => {
+        throw new DisTubeError("YTDLP_ERROR", `${e.stderr || e}`);
+      });
+    } else {
+      info = await json(url, {
+        dumpSingleJson: true,
+        noWarnings: true,
+        noCallHome: true,
+        preferFreeFormats: true,
+        skipDownload: true,
+        simulate: true,
+        cookies: this.cookies,
+        cookiesFromBrowser: this.cookiesFromBrowser
+      }).catch(e => {
+        throw new DisTubeError("YTDLP_ERROR", `${e.stderr || e}`);
+      });
+    }
     if (isPlaylist(info)) {
       if (info.entries.length === 0) throw new DisTubeError("YTDLP_ERROR", "The playlist is empty");
       return new Playlist(

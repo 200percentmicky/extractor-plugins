@@ -75,7 +75,8 @@
   },
   "typings": "./dist/index.d.ts",
   "dependencies": {
-    "dargs": "^7.0.0",
-    "undici": "^6.20.1"
+    "@distube/ytpl": "^1.2.1",
+    "dargs": "^8.1.0",
+    "undici": "^7.8.0"
   }
 }
