@@ -26,5 +26,6 @@ coverage
 out/
 build
 dist
+bin
 
 *.tgz
