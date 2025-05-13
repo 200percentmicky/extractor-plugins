@@ -36,7 +36,10 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
     let info;
     if (ytpl.validateID(url)) {
       info = await json(url, {
+        concurrentFragments: 10,
         dumpSingleJson: true,
+        extractAudio: true,
+        format: "bestaudio",
         noWarnings: true,
         noCallHome: true,
         preferFreeFormats: true,
@@ -50,7 +53,10 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
       });
     } else {
       info = await json(url, {
+        concurrentFragments: 10,
         dumpSingleJson: true,
+        extractAudio: true,
+        format: "bestaudio",
         noWarnings: true,
         noCallHome: true,
         preferFreeFormats: true,
@@ -84,7 +90,9 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
       throw new DisTubeError("YTDLP_PLUGIN_INVALID_SONG", "Cannot get stream url from invalid song.");
     }
     const info = await json(song.url, {
+      concurrentFragments: 10,
       dumpSingleJson: true,
+      extractAudio: true,
       noWarnings: true,
       noCallHome: true,
       preferFreeFormats: true,
