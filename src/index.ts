@@ -72,7 +72,6 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
     }
     if (isPlaylist(info)) {
       if (info.entries.length === 0) throw new DisTubeError("YTDLP_ERROR", "The playlist is empty");
-      console.log(info);
       return new Playlist(
         {
           source: info.extractor,
@@ -128,7 +127,7 @@ class YtDlpSong<T> extends Song<T> {
         name: info.title || info.fulltitle,
         url: info.webpage_url || info.original_url || info.url,
         isLive: info.is_live,
-        thumbnail: info.thumbnail || info.thumbnails?.[0]?.url,
+        thumbnail: info.thumbnail || info.thumbnails?.[0]?.url.toString().replace(/hqdefault/i, "maxresdefault"),
         duration: info.is_live ? 0 : info.duration,
         uploader: {
           name: info.uploader,
