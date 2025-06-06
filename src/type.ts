@@ -233,6 +233,7 @@ export interface YtDlpCaption {
 
 export interface YtDlpVideo {
   id: string;
+  ie_key: string;
   title: string;
   fulltitle: string;
   url: string;

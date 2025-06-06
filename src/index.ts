@@ -122,11 +122,11 @@ class YtDlpSong<T> extends Song<T> {
     super(
       {
         plugin,
-        source: info.extractor,
+        source: info.extractor || info.ie_key,
         playFromSource: true,
         id: info.id,
         name: info.title || info.fulltitle,
-        url: info.webpage_url || info.original_url,
+        url: info.webpage_url || info.original_url || info.url,
         isLive: info.is_live,
         thumbnail: info.thumbnail || info.thumbnails?.[0]?.url,
         duration: info.is_live ? 0 : info.duration,
