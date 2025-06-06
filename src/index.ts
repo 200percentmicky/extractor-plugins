@@ -40,6 +40,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
         dumpSingleJson: true,
         extractAudio: true,
         format: "bestaudio",
+        markWatched: true,
         noWarnings: true,
         noCallHome: true,
         preferFreeFormats: true,
@@ -57,6 +58,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
         dumpSingleJson: true,
         extractAudio: true,
         format: "bestaudio",
+        markWatched: true,
         noWarnings: true,
         noCallHome: true,
         preferFreeFormats: true,
@@ -70,6 +72,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
     }
     if (isPlaylist(info)) {
       if (info.entries.length === 0) throw new DisTubeError("YTDLP_ERROR", "The playlist is empty");
+      console.log(info);
       return new Playlist(
         {
           source: info.extractor,
@@ -93,6 +96,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
       concurrentFragments: 10,
       dumpSingleJson: true,
       extractAudio: true,
+      markWatched: true,
       noWarnings: true,
       noCallHome: true,
       preferFreeFormats: true,
