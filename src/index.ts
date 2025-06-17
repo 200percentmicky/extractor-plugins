@@ -39,7 +39,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
         concurrentFragments: 10,
         dumpSingleJson: true,
         extractAudio: true,
-        format: "ba*/bv*+ba",
+        format: "ba/bv*+ba*",
         markWatched: true,
         noWarnings: true,
         noCallHome: true,
@@ -57,7 +57,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
         concurrentFragments: 10,
         dumpSingleJson: true,
         extractAudio: true,
-        format: "ba*/bv*+ba",
+        format: "ba/bv*+ba*",
         markWatched: true,
         noWarnings: true,
         noCallHome: true,
@@ -103,7 +103,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
       simulate: true,
       cookies: this.cookies,
       cookiesFromBrowser: this.cookiesFromBrowser,
-      format: "ba*/bv*+ba",
+      format: "ba/bv*+ba*",
     }).catch(e => {
       throw new DisTubeError("YTDLP_ERROR", `${e.stderr || e}`);
     });
