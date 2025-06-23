@@ -368,4 +368,5 @@ export interface YtDlpOptions {
   update?: boolean;
   cookies?: string;
   cookiesFromBrowser?: string | "chrome" | "chromium" | "firefox";
+  format?: string;
 }

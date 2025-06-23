@@ -11,10 +11,12 @@ const isPlaylist = (i: any): i is YtDlpPlaylist => Array.isArray(i.entries);
 export class YtDlpPlugin extends PlayableExtractorPlugin {
   cookies?: string;
   cookiesFromBrowser?: string | "chrome" | "chromium" | "firefox";
-  constructor({ update, cookies, cookiesFromBrowser }: YtDlpOptions = {}) {
+  format?: string;
+  constructor({ update, cookies, cookiesFromBrowser, format }: YtDlpOptions = {}) {
     super();
     this.cookies = cookies;
     this.cookiesFromBrowser = cookiesFromBrowser;
+    this.format = format;
     if (update ?? true) download().catch(() => undefined);
   }
 
@@ -39,7 +41,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
         concurrentFragments: 10,
         dumpSingleJson: true,
         extractAudio: true,
-        format: "ba/bv*+ba*",
+        format: this.format ?? "ba/ba*",
         markWatched: true,
         noWarnings: true,
         noCallHome: true,
@@ -57,7 +59,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
         concurrentFragments: 10,
         dumpSingleJson: true,
         extractAudio: true,
-        format: "ba/bv*+ba*",
+        format: this.format ?? "ba/ba*",
         markWatched: true,
         noWarnings: true,
         noCallHome: true,
@@ -103,7 +105,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
       simulate: true,
       cookies: this.cookies,
       cookiesFromBrowser: this.cookiesFromBrowser,
-      format: "ba/bv*+ba*",
+      format: this.format ?? "ba/ba*",
     }).catch(e => {
       throw new DisTubeError("YTDLP_ERROR", `${e.stderr || e}`);
     });
