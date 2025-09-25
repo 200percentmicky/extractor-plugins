@@ -4,7 +4,6 @@ export interface YtDlpFlags {
   update?: boolean;
   ignoreErrors?: boolean;
   abortOnError?: boolean;
-  dumpUserAgent?: boolean;
   listExtractors?: boolean;
   extractorDescriptions?: boolean;
   forceGenericExtractor?: boolean;
@@ -58,7 +57,6 @@ export interface YtDlpFlags {
   httpChunkSize?: number | string;
   playlistReverse?: boolean;
   playlistRandom?: boolean;
-  xattrSetFilesize?: boolean;
   hlsUseMpegts?: boolean;
   noHlsUseMpegts?: boolean;
   downloader?: string;
@@ -108,7 +106,6 @@ export interface YtDlpFlags {
   dumpPages?: boolean;
   writePages?: boolean;
   printTraffic?: boolean;
-  callHome?: boolean;
   encoding?: string;
   legacyServerConnect?: boolean;
   noCheckCertificate?: boolean;
