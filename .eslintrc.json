@@ -4,7 +4,8 @@
   },
   "rules": {
     "valid-jsdoc": "off",
-    "jsdoc/check-tag-names": "off"
+    "jsdoc/check-tag-names": "off",
+    "linebreak-style": "off"
   },
   "extends": "distube",
   "ignorePatterns": [
