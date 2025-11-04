@@ -178,6 +178,7 @@ export interface YtDlpFlags {
   ignoreDynamicMpd?: boolean;
   hlsSplitDiscontinuity?: boolean;
   extractorArgs?: string;
+  jsRuntimes?: string;
   [x: string]: any;
 }
 
@@ -364,6 +365,7 @@ export type YtDlpResponse = YtDlpVideo | YtDlpPlaylist;
 export interface YtDlpOptions {
   update?: boolean;
   cookies?: string;
-  cookiesFromBrowser?: string | "chrome" | "chromium" | "firefox";
+  cookiesFromBrowser?: string;
+  jsRuntimes?: string;
   format?: string;
 }

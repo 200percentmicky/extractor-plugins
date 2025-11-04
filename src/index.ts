@@ -10,13 +10,16 @@ const isPlaylist = (i: any): i is YtDlpPlaylist => Array.isArray(i.entries);
 
 export class YtDlpPlugin extends PlayableExtractorPlugin {
   cookies?: string;
-  cookiesFromBrowser?: string | "chrome" | "chromium" | "firefox";
+  cookiesFromBrowser?: string;
+  jsRuntimes?: string;
   format?: string;
-  constructor({ update, cookies, cookiesFromBrowser, format }: YtDlpOptions = {}) {
+  constructor({ update, cookies, cookiesFromBrowser, jsRuntimes, format }: YtDlpOptions = {}) {
     super();
     this.cookies = cookies;
     this.cookiesFromBrowser = cookiesFromBrowser;
+    this.jsRuntimes = jsRuntimes;
     this.format = format;
+
     if (update ?? true) download().catch(() => undefined);
   }
 
@@ -49,7 +52,8 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
         simulate: true,
         flatPlaylist: true,
         cookies: this.cookies,
-        cookiesFromBrowser: this.cookiesFromBrowser
+        cookiesFromBrowser: this.cookiesFromBrowser,
+        jsRuntimes: this.jsRuntimes ?? "deno"
       }).catch(e => {
         throw new DisTubeError("YTDLP_ERROR", `${e.stderr || e}`);
       });
@@ -65,7 +69,8 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
         skipDownload: true,
         simulate: true,
         cookies: this.cookies,
-        cookiesFromBrowser: this.cookiesFromBrowser
+        cookiesFromBrowser: this.cookiesFromBrowser,
+        jsRuntimes: this.jsRuntimes ?? "deno"
       }).catch(e => {
         throw new DisTubeError("YTDLP_ERROR", `${e.stderr || e}`);
       });
@@ -103,6 +108,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
       cookies: this.cookies,
       cookiesFromBrowser: this.cookiesFromBrowser,
       format: this.format ?? "ba/ba*",
+      jsRuntimes: this.jsRuntimes ?? "deno"
     }).catch(e => {
       throw new DisTubeError("YTDLP_ERROR", `${e.stderr || e}`);
     });
