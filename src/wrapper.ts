@@ -35,7 +35,7 @@ export const json = (url: string, flags?: YtDlpFlags, options?: SpawnOptionsWith
       output += chunk;
     });
     process.on("close", code => {
-      if (code === 0) resolve(JSON.parse(output));
+      if (code === 0) resolve(JSON.parse(output.substring(output.indexOf("{"))));
       else reject(new Error(output));
     });
     process.on("error", reject);
