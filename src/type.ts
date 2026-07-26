@@ -368,4 +368,5 @@ export interface YtDlpOptions {
   cookiesFromBrowser?: string;
   jsRuntimes?: string;
   format?: string;
+  extractorArgs?: string;
 }

@@ -13,12 +13,14 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
   cookiesFromBrowser?: string;
   jsRuntimes?: string;
   format?: string;
-  constructor({ update, cookies, cookiesFromBrowser, jsRuntimes, format }: YtDlpOptions = {}) {
+  extractorArgs?: string;
+  constructor({ update, cookies, cookiesFromBrowser, jsRuntimes, format, extractorArgs }: YtDlpOptions = {}) {
     super();
     this.cookies = cookies;
     this.cookiesFromBrowser = cookiesFromBrowser;
     this.jsRuntimes = jsRuntimes;
     this.format = format;
+    this.extractorArgs = extractorArgs;
 
     if (update ?? true) download().catch(() => undefined);
   }
@@ -44,6 +46,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
         concurrentFragments: 10,
         dumpSingleJson: true,
         extractAudio: true,
+        extractorArgs: this.extractorArgs,
         format: this.format ?? "ba/ba*",
         markWatched: true,
         noWarnings: true,
@@ -62,6 +65,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
         concurrentFragments: 10,
         dumpSingleJson: true,
         extractAudio: true,
+        extractorArgs: this.extractorArgs,
         format: this.format ?? "ba/ba*",
         markWatched: true,
         noWarnings: true,
@@ -100,6 +104,7 @@ export class YtDlpPlugin extends PlayableExtractorPlugin {
       concurrentFragments: 10,
       dumpSingleJson: true,
       extractAudio: true,
+      extractorArgs: this.extractorArgs,
       markWatched: true,
       noWarnings: true,
       preferFreeFormats: true,
